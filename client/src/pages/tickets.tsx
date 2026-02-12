@@ -148,7 +148,7 @@ function InfoCard({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-5 animate-fade-in">
+    <div className="bg-white rounded-2xl shadow-lg p-5 animate-fade-in border border-border/30 card-hover">
       <div className="flex items-center gap-3 mb-4">
         <div className={`w-10 h-10 ${color} rounded-xl flex items-center justify-center text-white shadow-md`}>
           {icon}

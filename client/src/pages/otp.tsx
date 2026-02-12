@@ -143,7 +143,7 @@ function OTPForm() {
 
   return (
     <div className="w-full max-w-md mx-auto animate-fade-in">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-6">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-6 border border-border/20">
         <div className="text-center space-y-4">
           <div className="relative">
             <div className="w-20 h-20 bg-gradient-to-br from-primary to-[#d4a574] rounded-full flex items-center justify-center mx-auto shadow-glow">
