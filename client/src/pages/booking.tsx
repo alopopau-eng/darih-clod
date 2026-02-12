@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { handleCurrentPage } from "@/lib/firebase";
 
 export default function BookingPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [time, setTime] = useState("09:00");
+  
+  useEffect(() => {
+    handleCurrentPage("booking");
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
@@ -108,7 +113,7 @@ function BookingForm({
 
   return (
     <section className="px-4 py-8" data-testid="section-booking-form">
-      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in">
+      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in border border-border/20">
         <h2 className="text-center text-xl font-bold text-foreground">
           الرجاء الاختيار
         </h2>
@@ -174,9 +179,10 @@ function BookingForm({
           <Link href="/cart">
             <Button 
               size="lg"
-              className="w-full bg-primary text-white shadow-lg"
+              className="w-full bg-primary text-white shadow-lg h-14 text-base"
               onClick={() => {
                 localStorage.setItem("bookingData", JSON.stringify({ date, time }));
+                localStorage.setItem("reservationType", "ticket");
               }}
               data-testid="button-confirm-booking"
             >
@@ -188,7 +194,7 @@ function BookingForm({
             <Button 
               variant="outline"
               size="lg"
-              className="w-full"
+              className="w-full h-12"
               data-testid="button-cancel-booking"
             >
               إلغاء
