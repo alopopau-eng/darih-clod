@@ -19,8 +19,8 @@ export default function OTPPage() {
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/checkout">
             <Button
@@ -37,7 +37,7 @@ function Header() {
             <img
               src="/logo-white.svg"
               alt="الدرعية"
-              className="h-12"
+              className="h-10"
               data-testid="img-otp-logo"
             />
           </div>
@@ -143,7 +143,7 @@ function OTPForm() {
 
   return (
     <div className="w-full max-w-md mx-auto animate-fade-in">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-6">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-6 border border-border/20">
         <div className="text-center space-y-4">
           <div className="relative">
             <div className="w-20 h-20 bg-gradient-to-br from-primary to-[#d4a574] rounded-full flex items-center justify-center mx-auto shadow-glow">

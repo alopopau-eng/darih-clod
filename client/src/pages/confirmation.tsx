@@ -1,13 +1,16 @@
 import { Link } from "wouter";
-import { CheckCircle, Home, Ticket, Calendar, Clock, Download, Share2 } from "lucide-react";
+import { CheckCircle, Home, Ticket, Calendar, Clock, Download, Share2, UtensilsCrossed, Users, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export default function ConfirmationPage() {
+  const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
       <Header />
       <main className="flex-1 flex items-center justify-center p-4">
-        <SuccessMessage />
+        <SuccessMessage isRestaurant={isRestaurant} />
       </main>
     </div>
   );
@@ -15,13 +18,13 @@ export default function ConfirmationPage() {
 
 function Header() {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-center">
           <img
             src="/logo-white.svg"
             alt="الدرعية"
-            className="h-12"
+            className="h-10"
             data-testid="img-confirmation-logo"
           />
         </div>
@@ -30,8 +33,16 @@ function Header() {
   );
 }
 
-function SuccessMessage() {
+function SuccessMessage({ isRestaurant }: { isRestaurant: boolean }) {
   const bookingNumber = `DIR-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+  const [restaurantData, setRestaurantData] = useState<any>(null);
+
+  useEffect(() => {
+    if (isRestaurant) {
+      const stored = localStorage.getItem("restaurantBookingData");
+      if (stored) setRestaurantData(JSON.parse(stored));
+    }
+  }, [isRestaurant]);
 
   return (
     <div className="max-w-md mx-auto text-center animate-fade-in">
@@ -47,40 +58,89 @@ function SuccessMessage() {
         
         <div className="space-y-2 pt-4">
           <h1 className="text-2xl font-bold text-foreground" data-testid="text-success-title">
-            تم الحجز بنجاح!
+            {isRestaurant ? "تم تأكيد حجز المطعم!" : "تم الحجز بنجاح!"}
           </h1>
           <p className="text-muted-foreground">
-            شكراً لك، تم تأكيد حجزك. سيتم إرسال تفاصيل الحجز إلى بريدك الإلكتروني.
+            {isRestaurant 
+              ? "شكراً لك، تم تأكيد حجز المطعم. سيتم إرسال تفاصيل الحجز إلى بريدك الإلكتروني."
+              : "شكراً لك، تم تأكيد حجزك. سيتم إرسال تفاصيل الحجز إلى بريدك الإلكتروني."
+            }
           </p>
         </div>
 
         <div className="bg-gradient-to-br from-[#f5f0e8] to-[#ebe3d7] rounded-2xl p-6 space-y-4">
           <div className="flex items-center justify-center gap-2">
-            <Ticket className="w-5 h-5 text-primary" />
+            {isRestaurant ? (
+              <UtensilsCrossed className="w-5 h-5 text-primary" />
+            ) : (
+              <Ticket className="w-5 h-5 text-primary" />
+            )}
             <p className="text-sm text-muted-foreground">رقم الحجز</p>
           </div>
           <p className="text-3xl font-bold text-primary tracking-wider" data-testid="text-booking-number">
             {bookingNumber}
           </p>
           
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-primary/20">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
-                <Calendar className="w-4 h-4" />
-                <span className="text-xs">التاريخ</span>
+          {isRestaurant && restaurantData ? (
+            <div className="space-y-3 pt-4 border-t border-primary/20">
+              {restaurantData.restaurantName && (
+                <div className="flex items-center justify-center gap-2 text-foreground">
+                  <UtensilsCrossed className="w-4 h-4 text-primary" />
+                  <span className="font-semibold">{restaurantData.restaurantName}</span>
+                </div>
+              )}
+              <div className="grid grid-cols-3 gap-3">
+                {restaurantData.date && (
+                  <div className="text-center">
+                    <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span className="text-xs">التاريخ</span>
+                    </div>
+                    <p className="font-semibold text-foreground text-xs">
+                      {new Date(restaurantData.date).toLocaleDateString('ar-SA', { month: 'short', day: 'numeric' })}
+                    </p>
+                  </div>
+                )}
+                {restaurantData.time && (
+                  <div className="text-center">
+                    <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span className="text-xs">الوقت</span>
+                    </div>
+                    <p className="font-semibold text-foreground text-xs">{restaurantData.time}</p>
+                  </div>
+                )}
+                {restaurantData.guests && (
+                  <div className="text-center">
+                    <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
+                      <Users className="w-3.5 h-3.5" />
+                      <span className="text-xs">الضيوف</span>
+                    </div>
+                    <p className="font-semibold text-foreground text-xs">{restaurantData.guests}</p>
+                  </div>
+                )}
               </div>
-              <p className="font-semibold text-foreground text-sm">
-                {new Date().toLocaleDateString('ar-SA')}
-              </p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
-                <Clock className="w-4 h-4" />
-                <span className="text-xs">الوقت</span>
+          ) : (
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-primary/20">
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-xs">التاريخ</span>
+                </div>
+                <p className="font-semibold text-foreground text-sm">
+                  {new Date().toLocaleDateString('ar-SA')}
+                </p>
               </div>
-              <p className="font-semibold text-foreground text-sm">09:00</p>
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1 text-muted-foreground mb-1">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-xs">الوقت</span>
+                </div>
+                <p className="font-semibold text-foreground text-sm">09:00</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="flex gap-3">

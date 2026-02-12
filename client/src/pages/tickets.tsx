@@ -22,11 +22,11 @@ export default function TicketsPage() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white shadow-md">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/">
-            <Button size="icon" variant="ghost" className="text-white" data-testid="button-back">
+            <Button size="icon" variant="ghost" className="text-white hover:bg-white/10 transition-all" data-testid="button-back">
               <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
@@ -148,7 +148,7 @@ function InfoCard({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-5 animate-fade-in">
+    <div className="bg-white rounded-2xl shadow-lg p-5 animate-fade-in border border-border/30 card-hover">
       <div className="flex items-center gap-3 mb-4">
         <div className={`w-10 h-10 ${color} rounded-xl flex items-center justify-center text-white shadow-md`}>
           {icon}
@@ -227,6 +227,11 @@ function FooterSection() {
 }
 
 function BookNowButton() {
+  const handleBook = () => {
+    localStorage.setItem("reservationType", "ticket");
+    localStorage.removeItem("selectedRestaurant");
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#e8d5b5] to-[#f5ebe0] border-t p-4 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
       <div className="max-w-md mx-auto flex items-center justify-between gap-4">
@@ -234,7 +239,7 @@ function BookNowButton() {
           <p className="text-sm text-muted-foreground">السعر</p>
           <p className="text-xl font-bold text-primary">40 ر.س</p>
         </div>
-        <Link href="/registration">
+        <Link href="/registration" onClick={handleBook}>
           <Button 
             size="lg"
             className="bg-primary text-white px-8 shadow-lg"
