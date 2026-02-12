@@ -77,14 +77,14 @@ function Header() {
 
 function TitleSection() {
   return (
-    <div className="bg-gradient-to-r from-[#e8d5b5] to-[#d4c4a8] py-8 px-4 text-center">
+    <div className="bg-gradient-to-r from-[#c4956a] to-[#d4a574] py-6 px-4 text-center">
       <div className="flex items-center justify-center gap-3 mb-2">
-        <Ticket className="w-7 h-7 text-primary" />
-        <h1 className="text-2xl font-bold text-foreground" data-testid="text-booking-title">
+        <Ticket className="w-7 h-7 text-white" />
+        <h1 className="text-2xl font-bold text-white" data-testid="text-booking-title">
           تصريح دخول الدرعية
         </h1>
       </div>
-      <p className="text-muted-foreground text-sm">اختر التاريخ والوقت المناسب لزيارتك</p>
+      <p className="text-white/80 text-sm">اختر التاريخ والوقت المناسب لزيارتك</p>
     </div>
   );
 }

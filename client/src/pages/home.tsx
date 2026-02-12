@@ -182,21 +182,34 @@ function HeroSection() {
             <span className="text-sm font-medium">فعاليات الدرعية</span>
           </div>
           <h2
-            className="text-3xl md:text-5xl font-bold leading-tight"
+            className="text-3xl md:text-5xl font-bold leading-tight text-balance"
             data-testid="text-hero-title"
           >
             موسم قلب الدفء بدوي...
           </h2>
           <p className="text-lg opacity-90">٢٠ نوفمبر - ٢٨ فبراير</p>
-          <Link href="/tickets">
-            <Button
-              size="lg"
-              className="bg-primary text-white px-10 shadow-glow-lg"
-              data-testid="button-buy-tickets"
-            >
-              احجز تذكرة الدخول
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link href="/tickets">
+              <Button
+                size="lg"
+                className="bg-primary text-white px-10 shadow-glow-lg h-14 text-base"
+                data-testid="button-buy-tickets"
+              >
+                <Ticket className="w-5 h-5 ml-2" />
+                احجز تذكرة الدخول
+              </Button>
+            </Link>
+            <Link href="/restaurants">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-white border-white/40 hover:bg-white/10 px-8 h-14 text-base backdrop-blur-sm"
+              >
+                <UtensilsCrossed className="w-5 h-5 ml-2" />
+                حجز المطاعم
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -765,19 +778,19 @@ function Footer() {
             <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
               عن الدرعية
             </a>
-            <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
-              الوجهات
-            </a>
+            <Link href="/tickets" className="block text-white/70 hover:text-[#d4a574] transition-colors">
+              شراء التذاكر
+            </Link>
             <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
               الفعاليات
             </a>
           </div>
           <div className="space-y-3">
+            <Link href="/restaurants" className="block text-white/70 hover:text-[#d4a574] transition-colors">
+              المطاعم والمقاهي
+            </Link>
             <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
-              المطاعم
-            </a>
-            <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
-              التسوق
+              الوجهات
             </a>
             <a href="#" className="block text-white/70 hover:text-[#d4a574] transition-colors">
               تواصل معنا
