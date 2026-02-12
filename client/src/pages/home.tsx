@@ -16,6 +16,9 @@ import newsImage from "@assets/image(16).webp";
 import restaurantImage1 from "@assets/3e1c6b7cc5474e16b3ff667338eb24e3.webp";
 import restaurantImage2 from "@assets/46bde65ecfb34a12b9eab27a65e36ba0.webp";
 import restaurantImage3 from "@assets/7c1716032679483e8ed8d9fe2486f61e.webp";
+import restaurantImage4 from "@assets/07e7d6e1eaec4a279102afb36551479a.webp";
+import restaurantImage5 from "@assets/5a82b0703fac4b4b88589c094c5eee43.webp";
+import restaurantImage6 from "@assets/3f7a97fbb0e94f5fbf4b5afb407d77ca.webp";
 
 export default function Home() {
   return (
@@ -611,6 +614,27 @@ function RestaurantsSection() {
       rating: 4.7,
       image: restaurantImage3,
       price: "75 ر.س",
+    },
+    {
+      name: "لونغ شيم",
+      cuisine: "مأكولات تايلندية",
+      rating: 4.7,
+      image: restaurantImage4,
+      price: "80 ر.س",
+    },
+    {
+      name: "تاتيل",
+      cuisine: "مأكولات إسبانية",
+      rating: 4.8,
+      image: restaurantImage5,
+      price: "90 ر.س",
+    },
+    {
+      name: "زوما",
+      cuisine: "مأكولات يابانية",
+      rating: 4.9,
+      image: restaurantImage6,
+      price: "100 ر.س",
     },
   ];
 

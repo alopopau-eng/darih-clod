@@ -11,6 +11,30 @@ import restaurantImage3 from "@assets/8698e2f2cde0426da313c2497a35d985.webp";
 import restaurantImage4 from "@assets/7c1716032679483e8ed8d9fe2486f61e.webp";
 import restaurantImage5 from "@assets/81641ba7f7a04ad5898d402d114fff03.webp";
 import restaurantImage6 from "@assets/d99d30e08a7044bd930736e6da8cc680.webp";
+import restaurantImage7 from "@assets/07e7d6e1eaec4a279102afb36551479a.webp";
+import restaurantImage8 from "@assets/5a82b0703fac4b4b88589c094c5eee43.webp";
+import restaurantImage9 from "@assets/a49e06e53a5946eca35727c91bc458c8.webp";
+import restaurantImage10 from "@assets/image(10).webp";
+import restaurantImage11 from "@assets/image(11).webp";
+import restaurantImage12 from "@assets/image(12).webp";
+import restaurantImage13 from "@assets/image(13).webp";
+import restaurantImage14 from "@assets/130916d63c28497ea9df646321520642.webp";
+import restaurantImage15 from "@assets/16d4824735e144a5a782cd59a86f91d2.webp";
+import restaurantImage16 from "@assets/174251c0caf347caadd7c4482b3065d1.webp";
+import restaurantImage17 from "@assets/1f2d259e3acd43308d2565f39e0cfb55.webp";
+import restaurantImage18 from "@assets/3f7a97fbb0e94f5fbf4b5afb407d77ca.webp";
+import restaurantImage19 from "@assets/8d8b1776a5e04f5a80b46d4d22a38057.webp";
+import restaurantImage20 from "@assets/a96cd2f51a9d40c9bb1f2090ef4b4a94.webp";
+import restaurantImage21 from "@assets/dbbb81bd63cb4e93b568cbaede6de4c7.webp";
+import restaurantImage22 from "@assets/3f3ca9a0eba141cdb975651cd1baa5d2.webp";
+import restaurantImage23 from "@assets/image(1).webp";
+import restaurantImage24 from "@assets/image(3).webp";
+import restaurantImage25 from "@assets/image(4).webp";
+import restaurantImage26 from "@assets/image(6).webp";
+import restaurantImage27 from "@assets/image(7).webp";
+import restaurantImage28 from "@assets/image(9).webp";
+import restaurantImage29 from "@assets/205cd061d566405bac0c406ae7fe6349.webp";
+import restaurantImage30 from "@assets/dd5d1b95012d4e2db255074b278675b7.webp";
 import heroImage from "@assets/f8aae0c59e0b479b88d5e8ac4dbaa0b2.webp";
 
 interface Restaurant {
@@ -117,20 +141,370 @@ const restaurants: Restaurant[] = [
     reservationFee: 100,
     featured: true,
   },
+  {
+    id: "long-chim",
+    name: "لونغ شيم",
+    nameEn: "Long Chim",
+    cuisine: "مأكولات تايلندية",
+    rating: 4.7,
+    reviews: 265,
+    priceRange: "$$$$",
+    image: restaurantImage7,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:30 م - 11:30 م",
+    description: "أطباق تايلندية أصيلة من الشيف ديفيد تومبسون في أجواء فريدة",
+    reservationFee: 80,
+    featured: true,
+  },
+  {
+    id: "tatel",
+    name: "تاتيل",
+    nameEn: "TATEL",
+    cuisine: "مأكولات إسبانية",
+    rating: 4.8,
+    reviews: 310,
+    priceRange: "$$$$",
+    image: restaurantImage8,
+    location: "مطل البجيري، الدرعية",
+    hours: "01:00 م - 01:00 ص",
+    description: "مطعم إسباني فاخر يقدم أطباق البحر المتوسط مع لمسة عصرية",
+    reservationFee: 90,
+    featured: true,
+  },
+  {
+    id: "hakkasan",
+    name: "هاكاسان",
+    nameEn: "Hakkasan",
+    cuisine: "مأكولات صينية فاخرة",
+    rating: 4.9,
+    reviews: 380,
+    priceRange: "$$$$",
+    image: restaurantImage9,
+    location: "مطل البجيري، الدرعية",
+    hours: "06:00 م - 12:00 ص",
+    description: "تجربة طعام صينية عالمية حائزة على نجمة ميشلان",
+    reservationFee: 100,
+    featured: true,
+  },
+  {
+    id: "villa-mamas",
+    name: "فيلا ماماز",
+    nameEn: "Villa Mamas",
+    cuisine: "مأكولات بحرينية",
+    rating: 4.5,
+    reviews: 195,
+    priceRange: "$$$",
+    image: restaurantImage10,
+    location: "مطل البجيري، الدرعية",
+    hours: "11:00 ص - 11:00 م",
+    description: "نكهات خليجية تقليدية بلمسة بحرينية مميزة",
+    reservationFee: 60,
+  },
+  {
+    id: "lazurd",
+    name: "لازورد",
+    nameEn: "Lazurd",
+    cuisine: "مأكولات لبنانية",
+    rating: 4.6,
+    reviews: 240,
+    priceRange: "$$$",
+    image: restaurantImage11,
+    location: "حي البجيري، الدرعية",
+    hours: "12:00 م - 12:00 ص",
+    description: "أشهى المأكولات اللبنانية التقليدية والمشاوي في أجواء راقية",
+    reservationFee: 55,
+  },
+  {
+    id: "takya",
+    name: "تكية",
+    nameEn: "Takya",
+    cuisine: "مأكولات تركية",
+    rating: 4.7,
+    reviews: 220,
+    priceRange: "$$$",
+    image: restaurantImage12,
+    location: "حي البجيري، الدرعية",
+    hours: "10:00 ص - 11:30 م",
+    description: "أطباق تركية أصيلة مع خبز طازج ومقبلات شهية",
+    reservationFee: 55,
+  },
+  {
+    id: "nusr-et",
+    name: "نصرت",
+    nameEn: "Nusr-Et",
+    cuisine: "ستيك هاوس",
+    rating: 4.8,
+    reviews: 450,
+    priceRange: "$$$$",
+    image: restaurantImage13,
+    location: "مطل البجيري، الدرعية",
+    hours: "01:00 م - 01:00 ص",
+    description: "ستيك هاوس شهير عالمياً يقدم أجود أنواع اللحوم المشوية",
+    reservationFee: 120,
+    featured: true,
+  },
+  {
+    id: "sushi-samba",
+    name: "سوشي سامبا",
+    nameEn: "Sushi Samba",
+    cuisine: "مأكولات يابانية برازيلية",
+    rating: 4.6,
+    reviews: 198,
+    priceRange: "$$$$",
+    image: restaurantImage14,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:00 م - 12:00 ص",
+    description: "مزيج فريد من المطبخ الياباني والبرازيلي في أجواء مبهرة",
+    reservationFee: 85,
+  },
+  {
+    id: "em-sherif",
+    name: "أم شريف",
+    nameEn: "Em Sherif",
+    cuisine: "مأكولات لبنانية فاخرة",
+    rating: 4.7,
+    reviews: 275,
+    priceRange: "$$$$",
+    image: restaurantImage15,
+    location: "حي البجيري، الدرعية",
+    hours: "12:30 م - 11:30 م",
+    description: "مطبخ لبناني فاخر مع أجواء تراثية مستوحاة من بيروت",
+    reservationFee: 80,
+  },
+  {
+    id: "coya",
+    name: "كويا",
+    nameEn: "COYA",
+    cuisine: "مأكولات بيروفية",
+    rating: 4.5,
+    reviews: 187,
+    priceRange: "$$$$",
+    image: restaurantImage16,
+    location: "مطل البجيري، الدرعية",
+    hours: "06:00 م - 01:00 ص",
+    description: "تجربة أمريكا اللاتينية الفاخرة مع أطباق بيروفية مميزة",
+    reservationFee: 85,
+  },
+  {
+    id: "san-carlo",
+    name: "سان كارلو",
+    nameEn: "San Carlo",
+    cuisine: "مأكولات إيطالية",
+    rating: 4.6,
+    reviews: 230,
+    priceRange: "$$$$",
+    image: restaurantImage17,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:00 م - 12:00 ص",
+    description: "مطبخ إيطالي عريق بنكهات أصيلة من قلب ميلانو",
+    reservationFee: 75,
+  },
+  {
+    id: "zuma",
+    name: "زوما",
+    nameEn: "Zuma",
+    cuisine: "مأكولات يابانية معاصرة",
+    rating: 4.9,
+    reviews: 390,
+    priceRange: "$$$$",
+    image: restaurantImage18,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:30 م - 01:00 ص",
+    description: "مطعم ياباني معاصر شهير عالمياً بأطباق الروبياتا والسوشي",
+    reservationFee: 100,
+    featured: true,
+  },
+  {
+    id: "nozomi",
+    name: "نوزومي",
+    nameEn: "Nozomi",
+    cuisine: "مأكولات يابانية",
+    rating: 4.5,
+    reviews: 175,
+    priceRange: "$$$",
+    image: restaurantImage19,
+    location: "حي البجيري، الدرعية",
+    hours: "01:00 م - 12:00 ص",
+    description: "سوشي وساشيمي طازج يومياً مع أجود المكونات المستوردة",
+    reservationFee: 70,
+  },
+  {
+    id: "amazonico",
+    name: "أمازونيكو",
+    nameEn: "Amazonico",
+    cuisine: "مأكولات أمريكية لاتينية",
+    rating: 4.7,
+    reviews: 260,
+    priceRange: "$$$$",
+    image: restaurantImage20,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:00 م - 01:00 ص",
+    description: "رحلة طعام استوائية مع أجواء غابات الأمازون الساحرة",
+    reservationFee: 85,
+  },
+  {
+    id: "cipriani",
+    name: "شيبرياني",
+    nameEn: "Cipriani",
+    cuisine: "مأكولات إيطالية فاخرة",
+    rating: 4.8,
+    reviews: 320,
+    priceRange: "$$$$",
+    image: restaurantImage21,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:00 م - 12:00 ص",
+    description: "مطعم إيطالي فاخر من البندقية يقدم باستا وأطباق بحرية مميزة",
+    reservationFee: 90,
+    featured: true,
+  },
+  {
+    id: "the-maine",
+    name: "ذا ماين",
+    nameEn: "The Maine",
+    cuisine: "مأكولات بحرية",
+    rating: 4.6,
+    reviews: 210,
+    priceRange: "$$$$",
+    image: restaurantImage22,
+    location: "حي البجيري، الدرعية",
+    hours: "12:00 م - 11:30 م",
+    description: "أجود المأكولات البحرية الطازجة بأسلوب نيو إنجلاند الأمريكي",
+    reservationFee: 80,
+  },
+  {
+    id: "al-mahara",
+    name: "المحارة",
+    nameEn: "Al Mahara",
+    cuisine: "مأكولات بحرية فاخرة",
+    rating: 4.7,
+    reviews: 245,
+    priceRange: "$$$$",
+    image: restaurantImage23,
+    location: "مطل البجيري، الدرعية",
+    hours: "06:00 م - 11:30 م",
+    description: "تجربة طعام بحرية فاخرة مع أطباق المحيط الأكثر تميزاً",
+    reservationFee: 95,
+  },
+  {
+    id: "bab-al-qasr",
+    name: "باب القصر",
+    nameEn: "Bab Al Qasr",
+    cuisine: "مأكولات عربية فاخرة",
+    rating: 4.8,
+    reviews: 290,
+    priceRange: "$$$$",
+    image: restaurantImage24,
+    location: "المنطقة التراثية، الدرعية",
+    hours: "11:00 ص - 12:00 ص",
+    description: "مأكولات عربية فاخرة مستوحاة من قصور الملوك والأمراء",
+    reservationFee: 85,
+  },
+  {
+    id: "meraki",
+    name: "ميراكي",
+    nameEn: "Meraki",
+    cuisine: "مأكولات يونانية",
+    rating: 4.5,
+    reviews: 168,
+    priceRange: "$$$",
+    image: restaurantImage25,
+    location: "حي البجيري، الدرعية",
+    hours: "12:00 م - 11:00 م",
+    description: "أطباق يونانية تقليدية مع زيت الزيتون والأعشاب المتوسطية",
+    reservationFee: 60,
+  },
+  {
+    id: "nobu",
+    name: "نوبو",
+    nameEn: "Nobu",
+    cuisine: "مأكولات يابانية بيروفية",
+    rating: 4.9,
+    reviews: 420,
+    priceRange: "$$$$",
+    image: restaurantImage26,
+    location: "مطل البجيري، الدرعية",
+    hours: "06:00 م - 01:00 ص",
+    description: "تجربة الشيف نوبو ماتسوهيسا الشهيرة عالمياً في الدرعية",
+    reservationFee: 110,
+    featured: true,
+  },
+  {
+    id: "la-petite-maison",
+    name: "لابتيت ميزون",
+    nameEn: "La Petite Maison",
+    cuisine: "مأكولات فرنسية",
+    rating: 4.7,
+    reviews: 280,
+    priceRange: "$$$$",
+    image: restaurantImage27,
+    location: "مطل البجيري، الدرعية",
+    hours: "12:00 م - 12:00 ص",
+    description: "مطبخ نيس الفرنسي مع سلطة نيسواز الشهيرة وأطباق كوت دازور",
+    reservationFee: 80,
+  },
+  {
+    id: "al-diwan",
+    name: "الديوان",
+    nameEn: "Al Diwan",
+    cuisine: "مأكولات سعودية راقية",
+    rating: 4.6,
+    reviews: 205,
+    priceRange: "$$$",
+    image: restaurantImage28,
+    location: "المنطقة التراثية، الدرعية",
+    hours: "11:00 ص - 11:00 م",
+    description: "أطباق سعودية راقية بطريقة تقديم عصرية مع لمسة تراثية",
+    reservationFee: 55,
+  },
+  {
+    id: "cafe-bateel",
+    name: "مقهى بتيل",
+    nameEn: "Café Bateel",
+    cuisine: "مقهى فاخر ومعجنات",
+    rating: 4.4,
+    reviews: 150,
+    priceRange: "$$",
+    image: restaurantImage29,
+    location: "حي البجيري، الدرعية",
+    hours: "07:00 ص - 11:00 م",
+    description: "قهوة مختصة عالية الجودة مع معجنات فرنسية وحلويات التمر الفاخرة",
+    reservationFee: 35,
+  },
+  {
+    id: "urth-caffe",
+    name: "أورث كافيه",
+    nameEn: "Urth Caffé",
+    cuisine: "مقهى عضوي",
+    rating: 4.3,
+    reviews: 135,
+    priceRange: "$$",
+    image: restaurantImage30,
+    location: "حي الطريف، الدرعية",
+    hours: "07:00 ص - 10:00 م",
+    description: "مشروبات عضوية ومخبوزات طازجة في بيئة مريحة وعصرية",
+    reservationFee: 30,
+  },
 ];
 
 export default function RestaurantsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("الكل");
 
-  const filters = ["الكل", "مأكولات عالمية", "مأكولات سعودية", "مقاهي", "فاخر"];
+  const filters = ["الكل", "مميزة", "مأكولات عالمية", "مأكولات سعودية", "مأكولات آسيوية", "مأكولات بحرية", "إيطالي", "مقاهي", "فاخر"];
 
   const filteredRestaurants = restaurants.filter((r) => {
-    const matchesSearch = r.name.includes(searchQuery) || r.cuisine.includes(searchQuery);
-    if (selectedFilter === "الكل") return matchesSearch;
-    if (selectedFilter === "مقاهي") return matchesSearch && r.cuisine.includes("مقهى");
-    if (selectedFilter === "فاخر") return matchesSearch && r.priceRange === "$$$$";
-    return matchesSearch && r.cuisine.includes(selectedFilter.replace("مأكولات ", ""));
+    const matchesSearch = !searchQuery || r.name.includes(searchQuery) || r.nameEn.toLowerCase().includes(searchQuery.toLowerCase()) || r.cuisine.includes(searchQuery);
+    if (!matchesSearch) return false;
+    if (selectedFilter === "الكل") return true;
+    if (selectedFilter === "مميزة") return r.featured === true;
+    if (selectedFilter === "مقاهي") return r.cuisine.includes("مقهى");
+    if (selectedFilter === "فاخر") return r.priceRange === "$$$$";
+    if (selectedFilter === "مأكولات آسيوية") return r.cuisine.includes("يابان") || r.cuisine.includes("صيني") || r.cuisine.includes("تايل");
+    if (selectedFilter === "مأكولات بحرية") return r.cuisine.includes("بحري");
+    if (selectedFilter === "إيطالي") return r.cuisine.includes("إيطالي");
+    if (selectedFilter === "مأكولات سعودية") return r.cuisine.includes("سعودي") || r.cuisine.includes("تراثي") || r.cuisine.includes("عربي");
+    if (selectedFilter === "مأكولات عالمية") return r.cuisine.includes("عالمي") || r.cuisine.includes("متوسطي") || r.cuisine.includes("فرنسي") || r.cuisine.includes("إسباني") || r.cuisine.includes("يوناني");
+    return true;
   });
 
   return (
