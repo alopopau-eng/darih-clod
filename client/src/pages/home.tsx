@@ -1,4 +1,4 @@
-import { Menu, MapPin, Calendar, Clock, ArrowLeft, X, Sparkles } from "lucide-react";
+import { Menu, MapPin, Calendar, Clock, ArrowLeft, X, Sparkles, UtensilsCrossed, Ticket, Star, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -13,6 +13,9 @@ import historyImage from "@assets/image(8).webp";
 import historyCard1 from "@assets/image(2).webp";
 import historyCard2 from "@assets/c39ffb7ab18e440ba076c03243ccdaa1.webp";
 import newsImage from "@assets/image(16).webp";
+import restaurantImage1 from "@assets/3e1c6b7cc5474e16b3ff667338eb24e3.webp";
+import restaurantImage2 from "@assets/46bde65ecfb34a12b9eab27a65e36ba0.webp";
+import restaurantImage3 from "@assets/7c1716032679483e8ed8d9fe2486f61e.webp";
 
 export default function Home() {
   return (
@@ -21,7 +24,9 @@ export default function Home() {
       <main>
         <HeroSection />
         <QuickLinks />
+        <ServicesSection />
         <EventsSection />
+        <RestaurantsSection />
         <ExperienceSection />
         <DestinationsSection />
         <HistorySection />
@@ -38,10 +43,10 @@ function Header() {
   const menuItems = [
     { label: "الرئيسية", href: "/" },
     { label: "شراء التذاكر", href: "/tickets" },
+    { label: "المطاعم والمقاهي", href: "/restaurants" },
     { label: "الفعاليات", href: "/tickets" },
     { label: "الوجهات", href: "/tickets" },
     { label: "التجارب", href: "/tickets" },
-    { label: "الأخبار", href: "/tickets" },
   ];
 
   return (
@@ -202,9 +207,10 @@ function HeroSection() {
 
 function QuickLinks() {
   const links = [
-    { label: "اكتشف الدرعية", icon: MapPin },
-    { label: "الفعاليات", icon: Calendar },
-    { label: "المطاعم", icon: Clock },
+    { label: "شراء التذاكر", icon: Ticket, href: "/tickets" },
+    { label: "المطاعم", icon: UtensilsCrossed, href: "/restaurants" },
+    { label: "الفعاليات", icon: Calendar, href: "/tickets" },
+    { label: "اكتشف", icon: MapPin, href: "/tickets" },
   ];
 
   return (
@@ -215,7 +221,7 @@ function QuickLinks() {
       <div className="container mx-auto">
         <div className="flex flex-wrap gap-3 justify-center">
           {links.map((link, i) => (
-            <Link key={i} href="/tickets">
+            <Link key={i} href={link.href}>
               <Button
                 variant="outline"
                 className="gap-3 bg-card border-border rounded-full px-6 py-5 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-sm hover:shadow-glow"
@@ -226,6 +232,35 @@ function QuickLinks() {
               </Button>
             </Link>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesSection() {
+  return (
+    <section className="py-8 px-4 bg-gradient-to-b from-background to-[#f5f0e8]">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+          <Link href="/tickets">
+            <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-gradient-to-br from-primary to-[#5c4a3d] text-white p-6 text-center">
+              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <Ticket className="w-7 h-7" />
+              </div>
+              <h3 className="font-bold text-base mb-1">شراء التذاكر</h3>
+              <p className="text-white/70 text-xs">احجز تذكرة دخول الدرعية</p>
+            </Card>
+          </Link>
+          <Link href="/restaurants">
+            <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-gradient-to-br from-[#c4956a] to-[#8b6f47] text-white p-6 text-center">
+              <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <UtensilsCrossed className="w-7 h-7" />
+              </div>
+              <h3 className="font-bold text-base mb-1">حجز المطاعم</h3>
+              <p className="text-white/70 text-xs">احجز طاولتك الآن</p>
+            </Card>
+          </Link>
         </div>
       </div>
     </section>
@@ -538,6 +573,97 @@ function HistoryCard({
         </div>
       </Card>
     </Link>
+  );
+}
+
+function RestaurantsSection() {
+  const restaurants = [
+    {
+      name: "مطل البجيري",
+      cuisine: "مأكولات عالمية",
+      rating: 4.8,
+      image: restaurantImage1,
+      price: "75 ر.س",
+    },
+    {
+      name: "مطبخ سمحان",
+      cuisine: "مأكولات سعودية",
+      rating: 4.6,
+      image: restaurantImage2,
+      price: "50 ر.س",
+    },
+    {
+      name: "مطعم النخيل",
+      cuisine: "مأكولات متوسطية",
+      rating: 4.7,
+      image: restaurantImage3,
+      price: "75 ر.س",
+    },
+  ];
+
+  return (
+    <section className="py-10 px-4 bg-gradient-to-b from-[#f5f0e8] to-background" data-testid="section-restaurants">
+      <div className="container mx-auto">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-8">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <UtensilsCrossed className="w-5 h-5 text-primary" />
+              <h2 className="text-2xl font-bold text-foreground">المطاعم والمقاهي</h2>
+            </div>
+            <p className="text-muted-foreground text-sm">اكتشف أفخم تجارب الطعام</p>
+          </div>
+          <Link href="/restaurants">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-primary gap-2 hover:bg-primary/10"
+            >
+              عرض الكل
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {restaurants.map((restaurant, i) => (
+            <Link key={i} href="/restaurants">
+              <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+                <div className="relative h-44">
+                  <img
+                    src={restaurant.image}
+                    alt={restaurant.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute top-3 left-3">
+                    <div className="bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-primary" />
+                      {restaurant.rating}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 right-3 left-3">
+                    <h3 className="text-white font-bold text-lg drop-shadow-lg">{restaurant.name}</h3>
+                    <div className="flex items-center justify-between mt-1">
+                      <p className="text-white/70 text-xs">{restaurant.cuisine}</p>
+                      <span className="text-[#d4a574] font-bold text-sm">{restaurant.price}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center mt-6">
+          <Link href="/restaurants">
+            <Button className="bg-primary text-white px-8 shadow-lg gap-2">
+              <UtensilsCrossed className="w-4 h-4" />
+              استعرض جميع المطاعم
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 

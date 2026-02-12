@@ -16,6 +16,9 @@ const OTPPage = lazy(() => import("@/pages/otp"));
 const ConfirmationPage = lazy(() => import("@/pages/confirmation"));
 const DashboardPage = lazy(() => import("@/pages/dashboard"));
 const LoginPage = lazy(() => import("@/pages/login"));
+const RestaurantsPage = lazy(() => import("@/pages/restaurants"));
+const RestaurantBookingPage = lazy(() => import("@/pages/restaurant-booking"));
+const RestaurantCartPage = lazy(() => import("@/pages/restaurant-cart"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Router() {
@@ -32,6 +35,9 @@ function Router() {
         <Route path="/confirmation" component={ConfirmationPage} />
         <Route path="/dashboard" component={DashboardPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/restaurants" component={RestaurantsPage} />
+        <Route path="/restaurant-booking" component={RestaurantBookingPage} />
+        <Route path="/restaurant-cart" component={RestaurantCartPage} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
