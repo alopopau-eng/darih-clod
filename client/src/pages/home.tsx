@@ -2,7 +2,8 @@ import { Menu, MapPin, Calendar, Clock, ArrowLeft, X, Sparkles, UtensilsCrossed,
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import heroBackground from "@assets/37694b856a414197ac77a4d1ea9ce588.webp";
 import eventImage1 from "@assets/image(15).webp";
 import eventImage2 from "@assets/image(17)image(19).webp";
 import destinationImage1 from "@assets/455c3dc333504d44bfe63f8258282e15.webp";
@@ -139,42 +140,17 @@ function Header() {
 }
 
 function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.play().catch(() => {
-        document.addEventListener('touchstart', () => {
-          video.play();
-        }, { once: true });
-      });
-    }
-  }, []);
-
   return (
     <section
       className="relative h-[100vh] min-h-[600px] overflow-hidden"
       data-testid="section-hero"
     >
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        webkit-playsinline="true"
-        x5-playsinline="true"
-        x5-video-player-type="h5"
+      <img
+        src={heroBackground}
+        alt="الدرعية"
         className="absolute inset-0 w-full h-full object-cover scale-105"
-        data-testid="video-hero"
-      >
-        <source
-          src="https://assets.diriyah.me/videos/About+Page+DSA.mp4"
-          type="video/mp4"
-        />
-      </video>
+        data-testid="img-hero"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
 
